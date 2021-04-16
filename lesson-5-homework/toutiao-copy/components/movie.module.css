@@ -1,0 +1,33 @@
+.container{
+    height:120px;
+    position:relative;
+}
+
+.left{
+    position:relative;
+    height:80px;
+}
+
+.img{
+    position:absolute;
+    left:0;
+    top:20px;
+    width:125px;
+}
+
+.time{
+    position:absolute;
+    z-index:1;
+    left:85px;
+    bottom:0;
+    background: black;
+    color:white;
+    border-radius: 200px;
+    opacity: 0.5;
+}
+.word{
+    position:absolute;
+    right:0;
+    top:20px;
+    width:180px;
+}

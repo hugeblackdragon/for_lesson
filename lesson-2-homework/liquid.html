@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+body{
+    text-align: center;
+}
+.Col #container{
+    width:80%;
+    text-align: left;
+    margin:0 auto;
+}
+.Col #Left{
+    float:left;
+    width:20%;
+    background:#ccc;
+    padding:15px,0;
+}
+.Col #Right{
+    float:right;
+    width:20%;
+    background:#ccc;
+    padding:15px,0;
+}
+.Col #text{
+    margin: 0 25% 0 25% 
+}
+.Col #Left p, .Col #Left h3, .Col #Right p, .Col #right h3 {
+  margin-left: 10px; /* 对于将要放在侧栏中的每个元素，都应当设置左边距和右边距 */
+  margin-right: 10px;
+  }
+
+</style>
+<body class="Col">
+
+    <div id="container">
+      <div id="Left">
+        <h3>Sidebar1 </h3>
+    <p>此 div 上所显示的背景色刚好与内容等宽。如果您喜欢改用分界线，而且 #mainContent div 所包含的内容将始终比 #sidebar1 div 中的多，请在 #mainContent div 的左边缘放置一个边框。 </p>
+        <p>Donec eu mi sed turpis feugiat feugiat. Integer turpis arcu, pellentesque  eget, cursus et, fermentum ut, sapien. </p>
+        <!-- end #sidebar1 --></div>
+      <div id="Right">
+        <h3>Sidebar2 </h3>
+    <p>此 div 上所显示的背景色刚好与内容等宽。如果您喜欢改用分界线，而且 #mainContent div 所包含的内容将始终比 #sidebar2 div 中的多，请在 #mainContent div 的右边缘放置一个边框。 </p>
+        <p>Donec eu mi sed turpis feugiat feugiat. Integer turpis arcu, pellentesque  eget, cursus et, fermentum ut, sapien. </p>
+        <!-- end #sidebar2 --></div>
+      <div id="text">
+    <h1> 主要内容 </h1>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent aliquam,  justo convallis luctus rutrum, erat nulla fermentum diam, at nonummy quam  ante ac quam. Maecenas urna purus, fermentum id, molestie in, commodo  porttitor, felis. Nam blandit quam ut lacus. Quisque ornare risus quis  ligula. Phasellus tristique purus a augue condimentum adipiscing. Aenean  sagittis. Etiam leo pede, rhoncus venenatis, tristique in, vulputate at,  odio. Donec et ipsum et sapien vehicula nonummy. Suspendisse potenti. </p>
+        <h2>H2 级别的标题 </h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent aliquam,  justo convallis luctus rutrum, erat nulla fermentum diam, at nonummy quam  ante ac quam. Maecenas urna purus, fermentum id, molestie in, commodo  porttitor, felis. Nam blandit quam ut lacus. Quisque ornare risus quis  ligula. Phasellus tristique purus a augue condimentum adipiscing. Aenean  sagittis. Etiam leo pede, rhoncus venenatis, tristique in, vulputate at, odio.</p>
+        <!-- end #mainContent --></div>
+        <!-- 这个用于清除浮动的元素应当紧跟 #mainContent div 之后，以便强制 #container div 包含所有的子浮动 --><br class="clearfloat" />
+      <!-- end #container --></div>
+    </body>
+</html>

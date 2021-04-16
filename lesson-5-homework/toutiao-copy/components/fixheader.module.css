@@ -1,0 +1,29 @@
+.img{
+    position:absolute;
+    left:50px;
+
+}
+
+.wrapper{
+    position:absolute;
+    top:0;
+    left:200px;
+}
+
+.search{
+    position:absolute;
+    width:400px;
+    height:40px;
+    left:900px;
+    border-radius:15px 0 0 15px;
+    background:rgb(239, 237, 237);
+}
+
+.button{
+    width:80px;
+    position:absolute;
+    right:68px;
+    height:40px;
+    background: white;
+    border-radius:0 15px 15px 0;
+}

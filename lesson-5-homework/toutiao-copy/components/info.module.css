@@ -1,0 +1,31 @@
+.info{
+    height:150px;
+    position:relative;
+}
+
+.word{
+    position:absolute;
+    left:0;
+    width:400px;
+    text-align: left;
+}
+
+.content{
+    font-size: 25px;
+}
+
+.img_position{
+    position:absolute;
+    right:0;
+
+}
+
+.img{
+    width:200px;
+}
+
+.fonter{
+    position:absolute;
+    bottom:-90px;
+    color:gray;
+}

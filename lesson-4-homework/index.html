@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>轮播图</title>
+
+<style>
+/*作为实际视图的css*/
+.see{
+    margin: auto 500px;
+    width: 400px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    top:300px
+}
+/*整个轮播图的css我们通过改变mid绝对布局时的left来实现轮播*/
+.show{
+    position: absolute;
+    width: 1600px;
+    height: 250px;
+    transition: 1s;   /*这里是关于过渡动画效果的设置，此处设置为需要1s实现过渡*/
+}
+
+.pic1{
+    width: 400px;
+    height: 250px;
+    float: left;
+    background:red;
+}
+
+.pic2{
+    width: 400px;
+    height: 250px;
+    float: left;
+    background:green;
+}
+
+.pic3{
+    width: 400px;
+    height: 250px;
+    float: left;
+    background: gray;
+}
+
+.pic4{
+    width: 400px;
+    height: 250px;
+    float: left;
+    background: blue;
+}
+/*跳转栏和点的css*/
+.spot_block{
+    bottom: 0px;
+    right: 25%;
+    position: absolute;
+}
+
+.spot{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    left: 0px;
+    float: left;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align:center;
+    color:white;
+}
+/*上下页按钮的css*/
+.left::before{
+    cursor: pointer;
+    content:"<";
+    display:block;
+    width:30px;
+    height:60px;
+    position:absolute;
+    top:40%;
+    left:0px;
+    text-align:center;
+    line-height:60px;
+    font-size:30px;
+    color:#fff;
+}
+
+.right::before{
+    cursor: pointer;
+    content:">";
+    display:block;
+    width:30px;
+    height:60px;
+    position:absolute;
+    top:40%;
+    right:-1px;
+    text-align:center;
+    line-height:60px;
+    font-size:30px;
+    color:#fff;
+}
+</style>
+
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="example">
+</div>
+<script type="text/babel">
+const width=-400;
+class Auto extends React.Component{
+    constructor(props){
+        super(props);
+        //初始化state 一开始是第一张图 left会是改变图片的重点
+        this.state={
+            No: 0,
+            left: 0,
+            //拖拽的参数
+            flag: false,   
+            start:"",   
+            end: ""
+        }
+
+        this.tick_right = this.tick_right.bind(this);
+        this.tick_left = this.tick_left.bind(this);
+    }
+    //自动轮播 具体实现为过两秒调用tick_right()
+    componentDidMount(){
+        this.timer=setInterval(
+            ()=>this.tick_right(),
+            2000
+            //此处给出轮播时间 这里是3秒
+        );
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timer);
+    }
+    //下为按钮实现上/下一张
+    //定义右转但是此处定死了只有四张图，如果需要自定义图片数，需要需改下面判断中的3
+    tick_right(){
+        let No = this.state.No;
+        No++;
+        if(No > 3) {
+            No = 0;
+        }
+        this.setState({
+            No
+        });
+
+        this.setState({
+            left: width*No
+        });
+    }
+//定义左转，需注意第一张到最后一张的定义
+    tick_left(){
+        let No = this.state.No;
+        No--;
+        if(No < 0) {
+            No = 3;
+        }
+        this.setState({
+            No
+        });
+
+        this.setState({
+            left: width*No
+        })
+        console.log(this.state.No);
+    }    
+    //鼠标置于图片上的时候取消自动轮播
+    over(){
+        clearInterval(this.timer);
+    }
+    //鼠标移出后再次开始轮播
+    out(){
+        this.timer=setInterval(
+            ()=>this.tick_right(),
+            2000   //轮播间隔
+        );
+        document.getElementsByClassName('show')[0].style.transition="1s";
+        this.setState({
+            left:this.state.No* width,
+            flag:false
+        });            
+    }
+    
+//拖拽 要强调的是，这里实现的是需要鼠标自点下起左/右拖拽超过图片的一半宽度，在这里就是200px
+//按下鼠标按钮的行为 改变flag为true表示开始判断拖拽 
+    down(e){
+        this.setState({
+            flag:true,
+            end: e.clientX,
+            start:e.clientX
+        })
+        document.getElementsByClassName('show')[0].style.transition="0s";//因为拖拽的实时效果，要把过渡效果进行修改
+    }
+//这里是实现展示图片拖拽效果
+    move(e){
+        let move=0;
+        if(this.state.flag===true){
+            move=this.state.end-e.clientX;
+            this.setState({
+                end:e.clientX,
+                left:this.state.left-move
+            })
+        }
+    }
+//按键被松开 这时就要把flag再设回false了
+    up(e){
+        this.setState({
+            flag:false,
+        })
+        document.getElementsByClassName('show')[0].style.transition="1s";
+        //判断拖拽超过图片的一半就发生图片切换
+        if(this.state.start-e.clientX>0 && Math.abs(this.state.start-e.clientX)>=Math.abs(width/2)){
+            this.tick_right();
+        }
+        else if(this.state.start-e.clientX<0 && Math.abs(this.state.start-e.clientX)>=Math.abs(width/2)){
+            this.tick_left();
+        }
+        else{
+            this.setState({
+                left:this.state.No* width
+            }) 
+        }
+    }
+//设定点击跳转
+    spot(No){
+        this.setState({
+            No: No,
+            left: No* width
+        })
+    }
+
+    render(){
+        return(
+            <div className="see" onMouseOut={this.out.bind(this)} onMouseOver={this.over.bind(this)} onMouseDown={this.down.bind(this)} onMouseMove={this.move.bind(this)} onMouseUp={this.up.bind(this)}>
+            {/* // <div className="big"  onMouseDown={this.down.bind(this)} onMouseMove={this.move.bind(this)} onMouseUp={this.up.bind(this)}> */}
+                <div className="show" style={{left:this.state.left+"px"}}>
+                    <div className="pic1">这是图片1</div>
+                    <div className="pic2">这是图片2</div>
+                    <div className="pic3">这是图片3</div>
+                    <div className="pic4">这是图片4</div>
+                </div>
+                <div className="spot_block">
+                    <div className="spot" onClick={() => {this.spot(0)}} > ○ </div>
+                    <div className="spot" onClick={() => {this.spot(1)}} > ○ </div>
+                    <div className="spot" onClick={() => {this.spot(2)}} > ○ </div>
+                    <div className="spot" onClick={() => {this.spot(3)}} > ○ </div>
+                </div>
+                <div className="shift_block">
+                    <div className="left" onClick={this.tick_left}></div> 
+                    <div className="right" onClick={this.tick_right}></div>
+                </div>
+            </div>
+        );
+    }
+}
+ReactDOM.render(
+    <Auto></Auto>,
+    document.getElementById("example")
+);
+</script>
+</body>
+</html>
