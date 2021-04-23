@@ -1,0 +1,53 @@
+.aside {
+  display:flex;
+  flex: 0 0 40px; 
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+  background: rgb(rgb(212, 210, 210));
+}
+
+.aside::after {
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  -webkit-filter: blur(20px);
+  -moz-filter: blur(20px);
+  -ms-filter: blur(20px);
+  -o-filter: blur(20px);
+  filter: blur(20px);
+}
+
+.content{
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column; 
+}
+
+.body{
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  margin:0;
+}
+
+.main{
+  display: flex;
+  flex: 1 0 auto;
+  margin: 0;
+}
+
+
+.aside img {
+  width:30px;
+  margin:40px 10px 10px 10px;
+}
+
+@media screen and (max-width: 64em) {
+.aside{
+   display: none;
+}
+.hide{
+  display: none;
+}
+}

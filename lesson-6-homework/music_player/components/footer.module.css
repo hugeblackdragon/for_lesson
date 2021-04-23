@@ -1,0 +1,51 @@
+.fixed{
+    width:100%;
+    position:fixed;
+    bottom:0;
+}
+.footer {
+    display: flex;
+    flex: 0 0 90px;
+    background:rgba(89,78,78,0.8);
+    padding :10px;
+  }
+
+.track {
+    display:flex;
+    margin-right:auto;
+    padding-left: 20px;
+    color: white;
+
+}
+
+.control{
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: space-around;
+}
+.track img{
+    padding-right: 10px;
+}
+
+.img{
+    width:100px;
+}
+
+.info{
+
+}
+
+.info p:nth-child(1){
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 64em) {
+    .control {
+        justify-content: space-around;
+    }
+    .hide{
+        display:none;
+    }
+}

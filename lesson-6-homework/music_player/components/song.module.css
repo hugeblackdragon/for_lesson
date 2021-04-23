@@ -1,0 +1,33 @@
+.li{
+    display: flex;
+    padding:0 15px;
+    flex-direction: row;
+}
+.li:hover{
+    background:rgb(132, 144, 147)
+}
+.li:nth-of-type(even):hover{
+    background:rgb(132, 144, 147)
+}
+.li:nth-of-type(even){
+    background: #f2f2f2;
+}
+.li .catty-cloud{
+    border:1px solid black;
+    padding: 3px;
+    font-size: 0.7em;
+    border-radius: 30%;
+}
+.li p{
+    flex:0 0 25%;
+}
+
+@media screen and (max-width: 64em) {
+    .hide {
+        display:none;
+    } 
+
+    .right {
+        text-align: right;
+    }
+}
